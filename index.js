@@ -22,13 +22,29 @@ function displayRecipes(recipes) {
         recipeHeader.innerText = recipe.title; //gets the recipe title and we used h2
         recipeItem.appendChild(recipeHeader);
         
-        // const recipeItemPara = document.createElement("p");
-        // recipeItemPara.innerHTML = `
-        // <strong>Ingredients:</strong>
-        // ${recipe.extendedIngredients.map((ingredients) => ingredients.original)}`
+        const recipeItemDiv = document.createElement("p");
+        recipeItemDiv.classList.add("recipe-item__ingredients-list");
+        recipeItemDiv.innerHTML = `<h2><strong>Ingredients:</strong></h2>`;
 
-        // recipeItem.appendChild(recipeItemPara);
+        const recipeItemIngredients = document.createElement("ul");
+        recipeItemIngredients.classList.add("ingredients");
+        
+        recipe.extendedIngredients.map((ingredient) => {
+            const recipeItemIngredient = document.createElement("li");
+            recipeItemIngredient.classList.add("ingredients__ingredient");
+            recipeItemIngredient.innerText = ingredient.original;
+            recipeItemIngredients.appendChild(recipeItemIngredient); 
+        });
+        recipeItemDiv.appendChild(recipeItemIngredients);
+        
 
+        const recipeSourceLink = document.createElement("a");
+        recipeSourceLink.href = recipe.sourceUrl;
+        recipeSourceLink.target = "_blank";
+        recipeSourceLink.innerText = "View Recipe";
+
+        recipeItem.appendChild(recipeItemDiv);
+        recipeItem.appendChild(recipeSourceLink);
     });
 
 }
